@@ -1,11 +1,262 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portifólio</title>
+  </head>
+  <body>
+    <h1 class="main-title">MEU PORIFÓLIO</h1>
+
+    <div class="section">
+      <h2 class="title">Minhas Habilidades</h2>
+      <p class="text">
+        Já estudo programação a quase três anos, e nesse período estudei
+        diversas áreas da programação. Consigo criar jogos, sites, aplicativos e
+        quase qualquer coisa que seja software. Dentre as tecnologias que eu
+        domino eu posso citar (em categorias):
+      </p>
+
+      <div class="named-list">
+        <h3 class="subtitle">Linguagens:</h3>
+        <ol class="list">
+          <li class="text">C#</li>
+          <li class="text">Java</li>
+          <li class="text">JavaScript</li>
+          <li class="text">TypeScript</li>
+          <li class="text">Lua</li>
+        </ol>
+      </div>
+
+      <div class="named-list">
+        <h3 class="subtitle">Ambientes:</h3>
+        <ol class="list">
+          <li class="text">Visual Studio Code</li>
+          <li class="text">Visual Studio</li>
+          <li class="text">Unity</li>
+          <li class="text">Roblox Studio</li>
+        </ol>
+      </div>
+
+      <div class="named-list">
+        <h3 class="subtitle">Tecnologias:</h3>
+        <ol class="list">
+          <li class="text">Git</li>
+          <li class="text">GitHub</li>
+          <li class="text">GitBash</li>
+          <li class="text">Terminais</li>
+          <li class="text">React</li>
+        </ol>
+      </div>
+
+      <div class="named-list">
+        <h3 class="subtitle">Conhecimentos:</h3>
+        <ol class="list">
+          <li class="text">Principios SOLID</li>
+          <li class="text">POO</li>
+          <li class="text">Limpeza de código</li>
+          <li class="text">Estruturas de dados</li>
+          <li class="text">Algoritmos</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="title">Meus Projetos de Lógica de Programação</h2>
+
+      <div class="project">
+        <h3 class="subtitle">Membros da minha equipe</h3>
+        <p class="text" id="students"></p>
+
+        <script>
+          const studentsElement = document.getElementById("students");
+          const students = ["Victor", "Murilo", "Luís"];
+          const studentsCount = students.length;
+
+          studentsElement.textContent = `Alunos: ${getStudentsText()}`;
+
+          function getStudentsText() {
+            let studentsText = "";
+            for (let i = 0; i < studentsCount; i++) {
+              if (i === 0) {
+                studentsText += students[i];
+              } else if (i === studentsCount - 1) {
+                studentsText += ` e ${students[i]}.`;
+              } else {
+                studentsText += `, ${students[i]}`;
+              }
+            }
+            return studentsText;
+          }
+        </script>
+      </div>
+
+      <div class="project">
+        <h3 class="subtitle">Conversão de Temperatura</h3>
+
+        <div class="form">
+          <span class="text">Celsius: </span>
+          <input class="input" type="text" name="celsius" id="celsius-input" />
+        </div>
+
+        <div class="form">
+          <span class="text">Fahrenheit: </span>
+          <input
+            class="input"
+            type="text"
+            name="fahrenheit"
+            id="fahrenheit-input"
+          />
+        </div>
+
+        <script>
+          const celsiusInput = document.getElementById("celsius-input");
+          const fahrenheitInput = document.getElementById("fahrenheit-input");
+
+          celsiusInput.addEventListener("input", (e) => updateInput(e.target));
+          fahrenheitInput.addEventListener("input", (e) =>
+            updateInput(e.target),
+          );
+          celsiusInput.value = 0;
+          fahrenheitInput.value = 32;
+
+          function updateInput(input) {
+            input.value = formatNumber(input.value);
+            const value = Number(input.value);
+
+            if (input.name === "celsius") {
+              const fahrenheitValue = (value * 9) / 5 + 32;
+              fahrenheitInput.value = fahrenheitValue.toFixed(2);
+            }
+
+            if (input.name === "fahrenheit") {
+              const celsiusValue = ((value - 32) * 5) / 9;
+              celsiusInput.value = celsiusValue.toFixed(2);
+            }
+          }
+
+          function formatNumber(text) {
+            return text.replace(/[^\d.,]/g, "").replace(/,/g, ".");
+          }
+        </script>
+      </div>
+
+      <div class="project">
+        <h3>Lista de Tarefas</h3>
+
+        <div class="form">
+          <span class="text">Tarefa: </span>
+          <input class="input" type="text" name="task" id="task-input" />
+        </div>
+
+        <button class="button" id="add-task-button" type="button">
+          Adicionar Tarefa
+        </button>
+
+        <div class="named-list">
+          <h4 class="subtitle">Tarefas Adicionadas:</h4>
+          <ol class="list" id="task-list"></ol>
+        </div>
+
+        <script>
+          const taskInput = document.getElementById("task-input");
+          const addTaskButton = document.getElementById("add-task-button");
+          const taskList = document.getElementById("task-list");
+
+          addTaskButton.addEventListener("click", addTask);
+
+          function addTask() {
+            taskList.innerHTML += getTaskHTML(taskInput.value);
+            taskInput.value = "";
+          }
+
+          function getTaskHTML(task) {
+            return `
+          <li class="text">
+            ${task}
+          </li>
+        `;
+          }
+        </script>
+      </div>
+
+      <div class="project">
+        <h3 class="subtitle">Contador</h3>
+
+        <div class="counter">
+          <button class="button" id="minus-button">-</button>
+          <span class="text" id="counter-number">0</span>
+          <button class="button" id="plus-button">+</button>
+        </div>
+
+        <script>
+          const plusButton = document.getElementById("plus-button");
+          const minusButton = document.getElementById("minus-button");
+          const counterNumber = document.getElementById("counter-number");
+
+          plusButton.addEventListener("click", () => addCounter(1));
+          minusButton.addEventListener("click", () => addCounter(-1));
+
+          function addCounter(amount) {
+            const currentValue = Number(counterNumber.textContent);
+            const newValue = currentValue + amount;
+            counterNumber.textContent = newValue.toString();
+          }
+        </script>
+      </div>
+
+      <div class="project">
+        <h3 class="subtitle">Média da Turma</h3>
+        <div class="named-list">
+          <h4 class="subtitle">Médias:</h4>
+          <ol id="students-avarage"></ol>
+        </div>
+
+        <script>
+          const studentsAvarageList =
+            document.getElementById("students-avarage");
+          const studentsAvarages = [
+            { name: "Victor", avarage: 10 },
+            { name: "Camila", avarage: 4 },
+            { name: "Rafael", avarage: 8 },
+            { name: "Juliana", avarage: 6 },
+            { name: "Murilo", avarage: 2 },
+            { name: "Beatriz", avarage: 9 },
+            { name: "Lucas", avarage: 5 },
+            { name: "Fernanda", avarage: 7 },
+            { name: "Gabriel", avarage: 1 },
+            { name: "Amanda", avarage: 10 },
+            { name: "Luis", avarage: 3 },
+            { name: "Thiago", avarage: 8 },
+            { name: "Mariana", avarage: 0 },
+            { name: "Eduardo", avarage: 6 },
+            { name: "Larissa", avarage: 9 },
+            { name: "Gustavo", avarage: 4 },
+            { name: "Patricia", avarage: 7 },
+            { name: "Henrique", avarage: 2 },
+            { name: "Natália", avarage: 5 },
+            { name: "Bruno", avarage: 10 },
+            { name: "Isabela", avarage: 1 },
+          ];
+
+          for (let i = 0; i < studentsAvarages.length; i++) {
+            studentsAvarageList.innerHTML += getStudentAvarageHTML(i);
+          }
+
+          function getStudentAvarageHTML(index) {
+            return `
+          <li class="text">
+            ${getStudentAvarageText(index)}
+          </li>
+        `;
+          }
+
+          function getStudentAvarageText(index) {
+            const student = studentsAvarages[index];
+            return `${student.name}: ${student.avarage}`;
+          }
+        </script>
+      </div>
+    </div>
+  </body>
 </html>
